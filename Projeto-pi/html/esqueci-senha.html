@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar senha — Klion</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .login-box { width: 100%; max-width: 420px; padding: 1rem; }
+        .logo-center { text-align: center; margin-bottom: 2rem; }
+        .logo-center a { font-size: 2rem; font-weight: 600; color: var(--branco); text-decoration: none; }
+        .logo-center a span { color: var(--azul-brilhante); }
+        .logo-center p { color: var(--texto-muted); font-size: 0.875rem; margin-top: 0.25rem; }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <div class="logo-center">
+        <a href="/">K<span>lion</span></a>
+        <p>Recupere o acesso à sua conta</p>
+    </div>
+
+    <div class="card">
+        <div id="alerta" class="alert"></div>
+
+        <div class="form-group">
+            <label>Email cadastrado</label>
+            <input type="email" id="email" placeholder="seu@email.com" autocomplete="off">
+        </div>
+
+        <button class="btn" onclick="enviar()">Enviar link de recuperação</button>
+    </div>
+
+    <div class="link-helper">
+        Lembrou a senha? <a href="/login.html">Voltar ao login</a>
+    </div>
+</div>
+
+<script>
+    async function enviar(){
+        const email = document.getElementById("email").value
+        const alerta = document.getElementById("alerta")
+
+        if(!email){
+            alerta.style.display = "block"
+            alerta.textContent = "Digite seu email!"
+            alerta.className = "alert alert-erro"
+            return
+        }
+
+        const res = await fetch("/esqueci-senha", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email })
+        })
+
+        const data = await res.json()
+
+        alerta.style.display = "block"
+        alerta.textContent = data.mensagem
+
+        if(data.mensagem === "Email de recuperação enviado!"){
+            alerta.className = "alert alert-sucesso"
+        } else {
+            alerta.className = "alert alert-erro"
+        }
+    }
+</script>
+
+</body>
+</html>

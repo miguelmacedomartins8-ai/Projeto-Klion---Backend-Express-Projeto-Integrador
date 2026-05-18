@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+<nav>
+    <a href="/" class="nav-logo">K<span>lion</span></a>
+    <ul class="nav-links">
+        <li><a href="/">Início</a></li>
+        <li><a href="/sobre.html">Sobre</a></li>
+        <li><a href="/postagem.html">Postagens</a></li>
+        <li><a href="#" class="btn-sair" onclick="sair()">Sair</a></li>
+    </ul>
+</nav>
+ 
+<div class="container">
+    <p class="page-subtitle">Bem-vindo de volta</p>
+    <h1 class="page-title">Bem-vindo ao Klion</h1>
+ 
+    <div class="card" style="margin-top: 2rem;">
+        <h2 style="font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem;">A verdade sobre impostos</h2>
+        <p style="color: var(--texto-muted); font-size: 0.9rem; line-height: 1.6;">
+            Feito por DSM-2. Explore as postagens e descubra mais sobre o mundo dos impostos.
+        </p>
+        <a href="/postagem.html" style="display: inline-block; margin-top: 1.25rem; color: var(--azul-brilhante); text-decoration: none; font-size: 0.875rem; font-weight: 500;">
+            Ver postagens →
+        </a>
+    </div>
+</div>
+ 
+<script>
+    function verificarLogin(){
+        const token = localStorage.getItem("token")
+        if(!token){
+            window.location.href = "/login.html"
+        }
+    }
+ 
+    function sair(){
+        localStorage.removeItem("token")
+        window.location.href = "/login.html"
+    }
+ 
+    verificarLogin()
+</script>
+ 
+</body>
+</html>
