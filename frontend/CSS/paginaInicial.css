@@ -1,0 +1,207 @@
+/* Titulo inicial */
+
+.containerFlexTitulo {
+    margin: auto;
+    display: flex;
+    align-content: flex-end;
+    align-items: flex-end;
+    justify-content: space-between;
+    
+}
+
+.imagemTitulo {
+    align-self: self-end;
+}
+
+.tituloMain h1 {
+    font-family: "Montserrat", sans-serif;
+    text-align: left;
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    max-width: 600px;
+    color: #1e3a5f;
+}
+
+.tituloMain p {
+    margin-top: -10px;
+    line-height: 1.5rem;
+    max-width: 550px;
+    color: #333333;
+}
+
+.tituloInicial {
+    background: linear-gradient(to right,rgb(255, 255, 255), rgba(41, 105, 163, 0.2));
+    padding: 60px 0 20px;
+    margin-bottom: none;
+}
+
+.aviso {
+    color: #333333;
+    font-size: 12px;
+    max-width: 500px;
+}
+
+/* Botões */
+
+.botoes {
+    display: flex;
+    align-items: center;
+    margin-top: 3vh;
+    margin-bottom: 2vh;
+    gap: 12px;
+    max-width: 400;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#btn-primary {
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 50px;
+    background-color: #2969a3;
+    box-shadow: 0 5px 10px rgba(30, 58, 95, 0.5);
+    color: #ffffff;
+    padding: 12px 20px;
+    transition: 1s ease;
+}
+
+#btn-primary:hover {
+    font-weight: bolder;
+    color: #2969a3;
+    background-color: #ffffff;
+}
+
+#btn-secondary {
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 5px 10px rgba(51, 51, 51, 0.5);
+    color: #1e3a5f;
+    padding: 10px 20px;
+    transition: 1s ease;
+}
+
+#btn-secondary:hover {
+    font-weight: bolder;
+    color: #ffffff;
+    background-color: #2969a3;
+}
+
+ /* Parte da Explicação */
+
+.secaoExplicacao {
+    background-color: #f1f3f4;
+}
+
+.tituloExplicacao {
+    color: #1e3a5f;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.25rem;
+    margin-top: none;
+}
+
+.container-explicacao {
+    display: inline-flex;
+    justify-content: flex-start;
+    margin: auto;
+    gap: 40px;
+    width: 100%;
+    margin-top: 15px;
+    
+}
+
+.card-explicacao {
+    padding: 20px;
+    min-height: 400px;
+    min-width: 360px;
+    margin-top: 20px;
+    border-radius: 30px;
+    box-shadow: 0 5px 10px rgba(51, 51, 51, 0.5);
+    color: #333333;
+    background-color: #ffffff;
+}
+
+.card-explicacao h4 {
+    font-size: 1.2rem;
+}
+
+.card-explicacao span {
+    font-size: 2vw;
+    color: #2969a3;
+}
+
+/* Porque usar */
+
+.secaoUsabilidade {
+    background-color: #f1f3f4;  
+}
+
+.tituloUsabilidade {
+    color: #1e3a5f;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.25rem;
+    margin-top: none;
+}
+
+.container-usabilidade {
+    display: inline-flex;
+    align-items: center;
+    margin: auto;
+    gap: 50px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.card-usabilidade {
+    padding: 20px;
+    min-height: 400px;
+    max-width: 360px;
+    margin-top: 20px;
+    border-radius: 30px;
+    box-shadow: 0 5px 10px rgba(51, 51, 51, 0.5);
+    color: #333333;
+    background-color: #ffffff;
+}
+
+.card-usabilidade h4 {
+    font-size: 1.2rem;
+}
+
+.card-usabilidade span {
+    font-size: 2vw;
+    color: #2969a3;
+}
+
+#chaveSeguranca {
+    rotate: -30deg;
+}
+
+/* Q&A Duvidas e Respostas */
+
+
+.duvidas {
+    margin-bottom: 100px;
+}
+
+.tituloDuvidas {
+    color: #1e3a5f;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.25rem;
+    margin-top: none;
+}
+
+.duvidas details {
+    cursor: pointer;
+    user-select: none;
+    background: #1e3a5f;
+    color: #ffffff;
+    font-weight: 500;
+    padding: 25px;
+    border-radius: 35px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 10px rgba(51, 51, 51, 0.5);
+}
+
+.duvidas summary {
+  list-style: none;
+}

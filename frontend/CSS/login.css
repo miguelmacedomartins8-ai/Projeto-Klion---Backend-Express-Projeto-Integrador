@@ -1,0 +1,70 @@
+.caixaPrincipal{
+    height: 600px;
+    max-width: 1200px;
+    width: 30%;
+    align-content: center;
+    margin: 8vh auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px #dadada;
+    flex: 1;
+}
+
+h1,
+h2{
+    text-align: center;
+    margin: -50px 0 50px 0;
+    font-size: 90px;
+    font-family: "Montserrat", sans-serif;
+    text-shadow: 10px 5px 20px #999999;
+}
+
+#user{
+    margin: 25px 0 -10px 5px;
+}
+
+#esqueci{
+    margin: -5px 0 40px 20px;
+}
+
+form{
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input, button{
+    padding: 12px;
+    border: 1px solid #b1b0b0;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+button{
+    background: #667eea;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    align-self: center;
+    width: 200px;
+}
+
+button:hover{
+    background: #5a67d8;
+}
+
+
+.cadastrar{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.cadastrar a{
+    text-decoration: none;
+    color: black;
+}

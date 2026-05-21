@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova senha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Digite sua nova senha</h1>
+    <input type="password" id="novaSenha" placeholder="Nova senha"><br>
+    <button onclick="redefinir()">Redefinir senha</button>
+
+    <script>
+        async function redefinir(){
+            // pega o token da URL
+            const params = new URLSearchParams(window.location.search)
+            const token = params.get("token")
+
+            const novaSenha = document.getElementById("novaSenha").value
+
+            const res = await fetch("/nova-senha", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token, novaSenha })
+            })
+
+            const data = await res.json()
+            alert(data.mensagem)
+
+            if(data.mensagem === "Senha alterada com sucesso!"){
+                window.location.href = "/login.html"
+            }
+        }
+    </script>
+</body>
+</html>

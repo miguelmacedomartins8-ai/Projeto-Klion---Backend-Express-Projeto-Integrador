@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculando IR com praticidade - Imposto de Renda</title>
+
+    <!-- Logo da Janela -->
+    <link rel="shortcut icon" type="image/png" href="../image/logo-aba.png">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    
+    <!-- CSS  -->
+    <link rel="stylesheet" href="../CSS/global.css">    
+    <link rel="stylesheet" href="../CSS/reset.css">
+    <link rel="stylesheet" href="../CSS/contato.css">
+
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <a class="logo-icon" href="./index.html">
+                    <img width="60" height="60" src="../image/logo-aba.png">
+                </a>
+                <div class="logo-text">
+                    <span class="logo-title">KLion</span>
+                    <span class="logo-subtitle">Seu imposto de Renda, Simples e Seguro.</span>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li class="nav-item"><a href="calculadora.html" >Calculadora</a></li>
+                    <li class="nav-item"><a href="como-funciona.html" >Como Funciona</a></li>
+                    <li class="nav-item"><a href="sobre.html" >Sobre Nós</a></li>
+                    <li class="nav-item"><a href="contato.html" class="active">Contato</a></li>
+                    <li class="nav-item"><a href="index.html" >Home</a></li>
+                    <li class="nav-item"><a class="loginIcon" href="login.html"><img class="loginImage" width="40" height="40" src="../image/login.png"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="section contato">
+    <div class="container">
+        <div class="TituloFlexContato">
+            <div class="tituloContato">
+                <h1>Contato</h1>
+                <p>Caso algo dê errado com a simulação, nos envie uma mensagem explicando o erro! Agradecemos desde já.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section contato-form">
+        <div class="formulario-contato">
+
+            
+
+            <div class="formulario">
+                <div class="container">
+                
+                    <div class="contatoFlex">
+                        <div class="imagemContato">
+                            <img src="../image/envelope.png" width="500" height="350" alt="Imagem de um envelope enviando uma mensagem em formato de avião de papel">
+                        </div>
+
+                        <form class="card-contato" id="contact-form">
+
+                            
+
+                            <div class="form-group">
+                                <label for="name">Nome</label>
+                                <input type="text" id="name" placeholder="Seu nome completo" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" placeholder="voce@exemplo.com" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="msg">Mensagem</label>
+                                <textarea id="msg" rows="5" placeholder="Digite sua mensagem" required></textarea>
+                            </div>
+
+                            <button type="submit" class="botao-contato">Enviar</button>
+                        
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <h3>&copy 2025 - KLion - Cálculo de imposto de renda - Projeto de estudo</h3>
+            <p class="footer-note">Este site é um projeto para fins educacionais. Os valores apresentados podem não corresponder exatamente á legislação vigente.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

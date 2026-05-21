@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculando IR com praticidade - Imposto de Renda</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="shortcut icon" type="image/png" href="./image/logo-aba.png" />
+
+    <link rel="stylesheet" href="./CSS/tabela.css" />
+    <link rel="stylesheet" href="./CSS/global.css" />
+    <link rel="stylesheet" href="./CSS/reset.css" />
+  </head>
+  <body>
+    <!-- Cabeçalho -->
+    <header class="header">
+      <div class="container header-content">
+        <div class="logo-area">
+          <a class="logo-icon" href="./index.html">
+            <img src="./image/logo-aba.png" />
+          </a>
+          <div class="logo-text">
+            <span class="logo-title">KLion</span>
+            <span class="logo-subtitle"
+              >Seu imposto de Renda, Simples e Seguro.</span
+            >
+          </div>
+        </div>
+        <nav class="nav">
+          <ul>
+            <li class="nav-item"><a href="calculadora.html">Calculadora</a></li>
+            <li class="nav-item">
+              <a href="tabela.html" class="active">Tabela-Ficticia</a>
+            </li>
+            <li class="nav-item">
+              <a href="como-funciona.html">Como Funciona</a>
+            </li>
+            <li class="nav-item"><a href="sobre.html">Sobre Nós</a></li>
+            <li class="nav-item"><a href="contato.html">Contato</a></li>
+            <li class="nav-item"><a href="index.html">Home</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section class="section secao-claro">
+      <div class="container">
+        <div class="contentFlex">
+          <div>
+            <h2>Tabela progressiva fictícia</h2>
+            <p class="sub-tabela">
+              Esta é a mesma tabela fictícia usada na calculadora da página
+              inicial. <br />Ela foi criada apenas para fins de estudo, sem
+              qualquer vínculo com a tabela oficial.
+            </p>
+          </div>
+          <div class="imagem-tabela">
+            <img src="image/tabela.png" alt="imagem-tabela" />
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="painel table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Faixa</th>
+                <th>Limite até (R$)</th>
+                <th>Alíquota</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>20.000,00</td>
+                <td>0%</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>40.000,00</td>
+                <td>7,5%</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>60.000,00</td>
+                <td>15%</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Acima de 60.000,00</td>
+                <td>22,5%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="painel" style="margin-top: 24px;">
+          <h3>Como essa tabela é usada na calculadora?</h3>
+          <p>
+            O cálculo faz um fatiamento da renda: cada parte da base de cálculo
+            é tributada com a alíquota correspondente à sua faixa. A soma desses
+            pedaços gera o imposto estimado apresentado na página principal.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Rodapé -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>
+          &copy; 2025 - KLion - Cálculo de imposto de renda - Projeto de estudo
+        </p>
+        <p class="footer-note">
+          Ferramenta de simulação educativa. Nenhum dado é armazenado ou enviado
+          para servidores.
+        </p>
+      </div>
+    </footer>
+
+    <!-- JS externo -->
+    <script src="script.js" defer></script>
+  </body>
+</html>

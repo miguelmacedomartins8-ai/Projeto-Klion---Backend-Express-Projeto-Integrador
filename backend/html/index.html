@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Klion</title>
+</head>
+<body>
+    <h1>Bem-vindo ao Klion</h1>
+    <h2>A verdade sobre impostos</h2>
+    <p>feito por DSM-2</p>
+
+    <button onclick="sair()">Sair</button>
+
+    <script>
+    function verificarLogin(){
+        const token = localStorage.getItem("token")
+        if(!token){
+            window.location.href = "/login.html"
+        }
+    }
+
+    function sair(){
+        localStorage.removeItem("token")
+        window.location.href = "/login.html"
+    }
+
+    verificarLogin()
+</script>
+</body>
+</html>

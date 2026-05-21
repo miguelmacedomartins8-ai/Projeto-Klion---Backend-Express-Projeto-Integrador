@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Login</h1>
+
+    <input type="email" id="email" placeholder="Email" autocomplete="off"><br>
+    <input type="password" id="senha" placeholder="Senha" autocomplete="new-password"><br>
+    <button onclick="logar()">Entrar</button> 
+
+    <a href="/esqueci-senha.html">Esqueceu sua senha?</a>
+
+    <script>
+    async function logar(){
+        const email = document.getElementById("email").value
+        const senha = document.getElementById("senha").value
+
+        const res = await fetch("/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, senha })
+        })
+
+        const data = await res.json()
+
+        if(data.token){
+            localStorage.setItem("token", data.token)
+
+            // limpa os campos
+            document.getElementById("email").value = ""
+            document.getElementById("senha").value = ""
+
+            window.location.href = "/"
+        } else {
+            alert(data.mensagem)
+        }
+    }
+    </script>
+</body>
+</html>
