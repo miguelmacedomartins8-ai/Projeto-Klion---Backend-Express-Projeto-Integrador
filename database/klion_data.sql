@@ -6,7 +6,7 @@ CREATE TABLE usuario (
 );
 
 CREATE TABLE info_usuario_calculo (
-    id_infoCalculo  INT AUTO_INCREMENT PRIMARY KEY,
+    id_infoCalculo INT AUTO_INCREMENT PRIMARY KEY,
     renda_anual DECIMAL(9, 2),
     deducoes DECIMAL(9, 2),
     dependentes INTEGER,
@@ -15,6 +15,7 @@ CREATE TABLE info_usuario_calculo (
 );
 
 CREATE TABLE resultado_calculo (
+    id_resultado_calculo INT AUTO_INCREMENT PRIMARY KEY,
     base_calculo DECIMAL(9, 2),
     imposto_estimado DECIMAL(9, 2),
     aliquota_efetiva VARCHAR(6),
@@ -26,8 +27,8 @@ CREATE TABLE resultado_calculo (
 CREATE TABLE tabela_aliquota (
     id_tabela_aliquota INT AUTO_INCREMENT PRIMARY KEY,
     faixa INT NOT NULL,
-    limite_reais VARCHAR(20),
-    aliquota VARCHAR(6)
+    limite_reais VARCHAR(20) NOT NULL,
+    aliquota VARCHAR(6) NOT NULL
 );
 
 -- ####################################################################
