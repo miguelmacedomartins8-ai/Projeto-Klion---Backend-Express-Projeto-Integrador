@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro — Klion</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .login-box { width: 100%; max-width: 420px; padding: 1rem; }
+        .logo-center { text-align: center; margin-bottom: 2rem; }
+        .logo-center a { font-size: 2rem; font-weight: 600; color: var(--branco); text-decoration: none; }
+        .logo-center a span { color: var(--azul-brilhante); }
+        .logo-center p { color: var(--texto-muted); font-size: 0.875rem; margin-top: 0.25rem; }
+    </style>
+</head>
+<body>
+ 
+<div class="login-box">
+    <div class="logo-center">
+        <a href="/">K<span>lion</span></a>
+        <p>Crie sua conta</p>
+    </div>
+ 
+    <div class="card">
+        <div id="alerta" class="alert"></div>
+ 
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" id="nome" placeholder="Seu nome completo" autocomplete="off">
+        </div>
+ 
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="seu@email.com" autocomplete="off">
+        </div>
+ 
+        <div class="form-group">
+            <label>Senha</label>
+            <input type="password" id="senha" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        </div>
+ 
+        <button class="btn" onclick="cadastrar()">Criar conta</button>
+    </div>
+ 
+    <div class="link-helper">
+        Já tem conta? <a href="/login.html">Entrar</a>
+    </div>
+</div>
+ 
+<script>
+    async function cadastrar(){
+        const nome = document.getElementById("nome").value
+        const email = document.getElementById("email").value
+        const senha = document.getElementById("senha").value
+        const alerta = document.getElementById("alerta")
+ 
+        if(!nome || !email || !senha){
+            alerta.style.display = "block"
+            alerta.textContent = "Preencha todos os campos!"
+            alerta.className = "alert alert-erro"
+            return
+        }
+ 
+        const res = await fetch("/cadastro", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nome, email, senha })
+        })
+ 
+        const data = await res.json()
+ 
+        if(data.mensagem === "Usuário cadastrado com sucesso!"){
+            alerta.style.display = "block"
+            alerta.textContent = data.mensagem
+            alerta.className = "alert alert-sucesso"
+            setTimeout(() => { window.location.href = "/login.html" }, 1500)
+        } else {
+            alerta.style.display = "block"
+            alerta.textContent = data.mensagem
+            alerta.className = "alert alert-erro"
+        }
+    }
+</script>
+ 
+</body>
+</html>
