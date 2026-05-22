@@ -26,7 +26,7 @@ h2{
 }
 
 #esqueci{
-    margin: -5px 0 40px 20px;
+    margin: -3px 0 40px 10px;
 }
 
 form{
@@ -62,7 +62,7 @@ button:hover{
 
 .cadastrar{
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .cadastrar a{

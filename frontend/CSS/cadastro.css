@@ -1,0 +1,57 @@
+.caixaPrincipal{
+    max-width: 1200px;
+    width: 30%;
+    height: 500px;
+    align-content: center;
+    margin: 8vh auto;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0px 10px 10px #dadada;
+    border-radius: 10px;
+    flex: 1;
+}
+
+#acimaDoInput{
+    margin: 25px 0 -10px 5px;
+}
+
+h1,
+h2{
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    text-shadow: 10px 5px 16px #1e3a5f;
+    font-size: 50px;
+    color: #042f66;
+    margin: -50px 0 50px 0;
+}
+
+form{
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input, button{
+    padding: 12px;
+    border-radius: 20px;
+    border: 1px solid #b1b0b0;
+    font-size: 16px;
+}
+
+button{
+    background: #667eea;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    align-self: center;
+    width: 200px;
+    margin: 40px 0 0 0;
+}
+
+button:hover{
+    background: #5a67d8;
+}
