@@ -15,9 +15,10 @@ h1,
 h2{
     text-align: center;
     margin: -50px 0 50px 0;
-    font-size: 90px;
+    font-size: 60px;
     font-family: "Montserrat", sans-serif;
-    text-shadow: 10px 5px 20px #999999;
+    text-shadow: 10px 5px 16px #1e3a5f;
+    color: #042f66;
 }
 
 #user{
