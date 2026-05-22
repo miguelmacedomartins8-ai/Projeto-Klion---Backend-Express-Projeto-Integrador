@@ -11,7 +11,9 @@ CREATE TABLE info_usuario_calculo (
     deducoes DECIMAL(9, 2),
     dependentes INTEGER,
     fk_id_usuario INT,
-    FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id_usuario)
+    fk_id_tabela_aliquota int,
+    FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (fk_id_tabela_aliquota) REFERENCES tabela_aliquota(id_tabela_aliquota)
 );
 
 CREATE TABLE resultado_calculo (
