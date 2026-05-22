@@ -22,7 +22,7 @@ CREATE TABLE resultado_calculo (
     renda_liquida DECIMAL(9, 2),
     fk_id_usuario INT,
     FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id_usuario)
-)
+);
 
 CREATE TABLE tabela_aliquota (
     id_tabela_aliquota INT AUTO_INCREMENT PRIMARY KEY,
