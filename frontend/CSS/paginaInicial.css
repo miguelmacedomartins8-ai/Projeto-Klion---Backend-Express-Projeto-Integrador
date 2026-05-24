@@ -29,7 +29,7 @@
 }
 
 .tituloInicial {
-    background: linear-gradient(to right,rgb(255, 255, 255), rgba(41, 105, 163, 0.2));
+    background-color: #f1f3f4;
     padding: 60px 0 20px;
     margin-bottom: none;
 }
