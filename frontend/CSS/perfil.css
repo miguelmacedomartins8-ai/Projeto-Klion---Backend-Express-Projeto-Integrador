@@ -40,8 +40,15 @@ input{
     background-color: #333;
 }
 
+section h1 {
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 .caixa-principal{
     background: #E9E9E9;
+    padding: 30px;
     height: 700px;
     width: 900px;
     border-radius: 20px;
