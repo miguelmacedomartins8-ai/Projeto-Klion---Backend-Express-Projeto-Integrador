@@ -1,123 +1,219 @@
-document.addEventListener("DOMContentLoaded", function() {
-    
-    const formCalculadora = document.querySelector('form.form-calculadora'); 
+document.addEventListener("DOMContentLoaded", function () {
 
-    if (formCalculadora) {
-        
-        formCalculadora.addEventListener('submit', function(event) {
-            
-            event.preventDefault(); 
-            
-            calcularImposto(); 
-        });
-    } else {
-      console.error("Formulário da calculadora não encontrado!");
-    }
-});
+    const formCalc    = document.querySelector("form.form-calculadora")
+    const inpRenda    = document.getElementById("rendaAno")
+    const inpDeducao  = document.getElementById("deducao")
+    const inpDep      = document.getElementById("dependente")
+    const errorEl     = document.getElementById("form-error")
+    const badge       = document.getElementById("badge-status")
 
-const taxBrackets = [
-  { limit: 20000, rate: 0.0 },
-  { limit: 40000, rate: 0.075 },
-  { limit: 60000, rate: 0.15 },
-  { limit: Infinity, rate: 0.225 }
-];
+    const modalOverlay    = document.getElementById("modalDados")
+    const btnAbrirModal   = document.getElementById("btnAbrirModal")
+    const btnFecharModal  = document.getElementById("btnFecharModal")
+    const btnCancelarModal= document.getElementById("btnCancelarModal")
+    const btnSalvarModal  = document.getElementById("btnSalvarModal")
+    const modalStatus     = document.getElementById("modal-status")
+    const modalRenda      = document.getElementById("modal-renda")
+    const modalDeducoes   = document.getElementById("modal-deducoes")
+    const modalDep        = document.getElementById("modal-dependentes")
 
-const DEDUCAO_POR_DEPENDENTE = 2000;
+    carregarDadosUsuario()
 
-function calcularImposto() {
-  const rendaAnoInput = document.getElementById("rendaAno");
-  const deducaoInput = document.getElementById("deducao");
-  const dependenteInput = document.getElementById("dependente");
-  const errorEl = document.getElementById("form-error");
+    btnAbrirModal.addEventListener("click", abrirModal)
+    btnFecharModal.addEventListener("click", fecharModal)
+    btnCancelarModal.addEventListener("click", fecharModal)
 
-  const resultadoBase = document.getElementById("resultado-base");
-  const resultadoImposto = document.getElementById("resultado-imposto");
-  const resultadoAliquota = document.getElementById("resultado-aliquota");
-  const resultadoLiquida = document.getElementById("resultado-liquida");
+    // Fechar clicando fora da caixa
+    modalOverlay.addEventListener("click", function (e) {
+        if (e.target === modalOverlay) fecharModal()
+    })
 
-  if (!rendaAnoInput || !resultadoBase) {
-    return;
-  }
+    btnSalvarModal.addEventListener("click", salvarDadosModal)
 
-  errorEl.textContent = "";
-
-  const income = parseFloat(rendaAnoInput.value.replace(",", ".")) || 0;
-  const deductions = parseFloat(deducaoInput.value.replace(",", ".")) || 0;
-  const dependents = parseInt(dependenteInput.value, 10) || 0;
-
-  if (income <= 0) {
-    errorEl.textContent = "Por favor, informe uma renda anual maior que zero.";
-    limparResultados();
-    return;
-  }
-
-  if (deductions < 0) {
-    errorEl.textContent = "As deduções não podem ser negativas.";
-    limparResultados();
-    return;
-  }
-
-  if (dependents < 0) {
-    errorEl.textContent = "O número de dependentes não pode ser negativo.";
-    limparResultados();
-    return;
-  }
-
-  const deducaoDependentes = dependents * DEDUCAO_POR_DEPENDENTE;
-  const totalDeducoes = deductions + deducaoDependentes;
-
-  let taxableIncome = income - totalDeducoes;
-  if (taxableIncome < 0) taxableIncome = 0;
-
-  const tax = calcularPorTabela(taxableIncome);
-  const netIncome = income - tax;
-  const effectiveRate = income > 0 ? (tax / income) * 100 : 0;
-
-  resultadoBase.textContent = formatCurrency(taxableIncome);
-  resultadoImposto.textContent = formatCurrency(tax);
-  resultadoAliquota.textContent = effectiveRate.toFixed(2) + " %";
-  resultadoLiquida.textContent = formatCurrency(netIncome);
-}
-
-function calcularPorTabela(taxableIncome) {
-  let restante = taxableIncome;
-  let imposto = 0;
-  let faixaAnterior = 0;
-
-  for (const faixa of taxBrackets) {
-    const tetoFaixa = faixa.limit;
-
-    const baseFaixa = Math.min(restante, tetoFaixa - faixaAnterior);
-    if (baseFaixa <= 0) {
-      faixaAnterior = tetoFaixa;
-      continue;
+    if (formCalc) {
+        formCalc.addEventListener("submit", function (e) {
+            e.preventDefault()
+            calcular()
+        })
     }
 
-    imposto += baseFaixa * faixa.rate;
-    restante -= baseFaixa;
-    faixaAnterior = tetoFaixa;
+    // Busca dados do usuário e preenche a calculadora
+    async function carregarDadosUsuario() {
+        const token = localStorage.getItem("token")
+        if (!token) return  // não logado, não faz nada
 
-    if (restante <= 0) break;
-  }
+        try {
+            const res  = await fetch("/info-usuario", {
+                headers: { "authorization": token }
+            })
+            const data = await res.json()
 
-  return imposto;
-}
+            if (data && data.renda_anual) {
+                // Preenche os campos da calculadora
+                inpRenda.value   = data.renda_anual
+                inpDeducao.value = data.deducoes   || 0
+                inpDep.value     = data.dependentes || 0
 
-function limparResultados() {
-  const rt = document.getElementById("resultado-base");
-  const rtax = document.getElementById("resultado-imposto");
-  const rr = document.getElementById("resultado-aliquota");
-  const rn = document.getElementById("resultado-liquida");
-  if (!rt) return;
-  rt.textContent = "–";
-  rtax.textContent = "–";
-  rr.textContent = "–";
-  rn.textContent = "–";
-}
+                // Preenche também o modal (para edição)
+                modalRenda.value    = data.renda_anual
+                modalDeducoes.value = data.deducoes   || 0
+                modalDep.value      = data.dependentes || 0
 
-function formatCurrency(value) {
-  return value.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-  });
-}
+                // Badge verde
+                atualizarBadge(true)
+            } else {
+                // Sem dados salvos → badge amarelo
+                atualizarBadge(false)
+            }
+        } catch (err) {
+            console.error("Erro ao buscar dados:", err)
+        }
+    }
+
+    // Atualiza o badge de status
+    function atualizarBadge(temDados) {
+        if (temDados) {
+            badge.className = "badge-dados tem-dados"
+            badge.textContent = "✅ Dados salvos"
+        } else {
+            badge.className = "badge-dados sem-dados"
+            badge.textContent = "⚠️ Sem dados salvos — clique em Meus Dados"
+        }
+    }
+
+    // Abre o modal
+    function abrirModal() {
+        modalStatus.textContent = ""
+        modalStatus.className   = "modal-status"
+        modalOverlay.classList.add("aberto")
+    }
+
+    // Fecha o modal
+    function fecharModal() {
+        modalOverlay.classList.remove("aberto")
+    }
+
+    // Salva os dados do modal no backend e preenche a calculadora
+    async function salvarDadosModal() {
+        const token = localStorage.getItem("token")
+
+        if (!token) {
+            alert("Você precisa estar logado!")
+            window.location.href = "./login.html"
+            return
+        }
+
+        const renda      = modalRenda.value
+        const deducoes   = modalDeducoes.value   || 0
+        const dependentes = modalDep.value        || 0
+
+        if (!renda || parseFloat(renda) <= 0) {
+            mostrarStatusModal("⚠️ Informe uma renda anual válida.", "erro")
+            return
+        }
+
+        btnSalvarModal.textContent = "Salvando..."
+        btnSalvarModal.disabled    = true
+
+        try {
+            const res  = await fetch("/info-usuario", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": token
+                },
+                body: JSON.stringify({ renda_anual: renda, deducoes, dependentes })
+            })
+            const data = await res.json()
+
+            // Atualiza os campos da calculadora com os novos dados
+            inpRenda.value   = renda
+            inpDeducao.value = deducoes
+            inpDep.value     = dependentes
+
+            atualizarBadge(true)
+            mostrarStatusModal("✅ " + data.mensagem, "sucesso")
+
+            // Fecha o modal automaticamente após 1.5s
+            setTimeout(fecharModal, 1500)
+
+        } catch (err) {
+            mostrarStatusModal("❌ Erro ao salvar. Tente novamente.", "erro")
+        } finally {
+            btnSalvarModal.textContent = "💾 Salvar Dados"
+            btnSalvarModal.disabled    = false
+        }
+    }
+
+    // Mostra mensagem de status no modal
+    function mostrarStatusModal(msg, tipo) {
+        modalStatus.textContent = msg
+        modalStatus.className   = "modal-status " + tipo
+    }
+
+    // Faz o cálculo chamando o backend
+    async function calcular() {
+        const token = localStorage.getItem("token")
+
+        if (!token) {
+            alert("Você precisa estar logado para usar a calculadora!")
+            window.location.href = "./login.html"
+            return
+        }
+
+        const renda     = inpRenda.value
+        const deducao   = inpDeducao.value  || 0
+        const dependente= inpDep.value      || 0
+
+        errorEl.textContent = ""
+
+        if (!renda || parseFloat(renda) <= 0) {
+            errorEl.textContent = "Por favor, informe uma renda anual maior que zero."
+            return
+        }
+
+        // Garante que os dados mais recentes dos campos estão salvos antes de calcular
+        await fetch("/info-usuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": token
+            },
+            body: JSON.stringify({
+                renda_anual: renda,
+                deducoes: deducao,
+                dependentes: dependente
+            })
+        })
+
+        // Chama o cálculo
+        const resCalculo = await fetch("/calcular", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": token
+            }
+        })
+
+        const dataCalculo = await resCalculo.json()
+
+        if (dataCalculo.resultado) {
+            const r = dataCalculo.resultado
+            document.getElementById("resultado-base").textContent     = formatCurrency(parseFloat(r.base_calculo))
+            document.getElementById("resultado-imposto").textContent  = formatCurrency(parseFloat(r.imposto_estimado))
+            document.getElementById("resultado-aliquota").textContent = r.aliquota_efetiva
+            document.getElementById("resultado-liquida").textContent  = formatCurrency(parseFloat(r.renda_liquida))
+            atualizarBadge(true)
+        } else {
+            errorEl.textContent = dataCalculo.mensagem || "Erro ao calcular."
+        }
+    }
+
+    // Formata valor em BRL
+    function formatCurrency(value) {
+        return value.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        })
+    }
+})

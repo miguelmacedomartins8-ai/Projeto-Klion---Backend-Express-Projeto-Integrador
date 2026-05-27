@@ -36,7 +36,32 @@
                     <li class="nav-item"><a href="sobre.html" >Sobre Nós</a></li>
                     <li class="nav-item"><a href="contato.html" >Contato</a></li>
                     <li class="nav-item"><a href="index.html" >Home</a></li>
-                    <li class="nav-item"> <a class="loginIcon" href="login.html"><span class="material-symbols-outlined">account_circle</span></a></li>
+                                        <li class="nav-item user-menu-wrapper">
+                        <button class="btn-user-icon" id="btnUserIcon" aria-label="Menu do usuário">
+                            <span class="material-symbols-outlined">account_circle</span>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-perfil">
+                                <div class="dropdown-avatar" id="dropAvatar">?</div>
+                                <div class="dropdown-info">
+                                    <span class="dropdown-nome" id="dropNome"></span>
+                                    <span class="dropdown-email" id="dropEmail"></span>
+                                </div>
+                            </div>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" id="btnHistorico">
+                                    <span class="material-symbols-outlined">history</span>
+                                    Histórico
+                                </button>
+                            </div>
+                            <div class="dropdown-sair">
+                                <button class="dropdown-item sair" id="btnSair">
+                                    <span class="material-symbols-outlined">logout</span>
+                                    Sair da conta
+                                </button>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -62,5 +87,52 @@
             </div>
         </div>
     </footer>
+    <script>
+    document.getElementById("cadastroForm").addEventListener("submit", async function(e){
+        e.preventDefault()  // impede o form de recarregar a página
+
+        const nome = document.getElementById("usuario").value
+        const email = document.getElementById("email").value
+        const senha = document.getElementById("password").value
+
+        const res = await fetch("/cadastro", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nome, email, senha })
+        })
+
+        const data = await res.json()
+
+        if(data.mensagem === "Usuário cadastrado com sucesso!"){
+            alert(data.mensagem)
+            window.location.href = "./login.html"
+        } else {
+            alert(data.mensagem)
+        }
+    })
+</script>
+
+    <!-- MODAL HISTÓRICO -->
+    <div class="modal-historico-overlay" id="modalHistorico">
+        <div class="modal-historico-box">
+            <div class="modal-historico-header">
+                <h2>📊 Histórico de Cálculos</h2>
+                <button class="historico-fechar" id="btnFecharHistorico">✕</button>
+            </div>
+
+            <div class="historico-dados-salvos">
+                <h4>📋 Dados Financeiros Salvos</h4>
+                <div id="histDadosSalvos">
+                    <p style="color:#888;font-size:0.85rem">Carregando...</p>
+                </div>
+            </div>
+
+            <p class="historico-titulo-calculos">🧮 Cálculos Realizados</p>
+            <div id="histListaCalculos"></div>
+        </div>
+    </div>
+    <!-- FIM MODAL HISTÓRICO -->
+
+    <script src="../js/menu-usuario.js" defer></script>
 </body>
 </html>

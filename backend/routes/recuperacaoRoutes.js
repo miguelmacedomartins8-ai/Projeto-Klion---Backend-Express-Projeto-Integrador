@@ -31,7 +31,7 @@ router.post("/esqueci-senha", async function(req, res){
     await usuario.update({ tokenRecuperacao: token })
 
     // monta o link de recuperação
-    const link = `http://localhost:2026/nova-senha.html?token=${token}`
+    const link = `http://localhost:2026/views/nova-senha.html?token=${token}`
 
     // envia o email
     await transporter.sendMail({

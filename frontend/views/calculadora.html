@@ -18,9 +18,6 @@
     <link rel="stylesheet" href="../CSS/global.css">
     <link rel="stylesheet" href="../CSS/reset.css">
     <link rel="stylesheet" href="../CSS/calculadora.css">
-
-
-
 </head>
 <body>
     <header class="header">
@@ -41,98 +38,162 @@
                     <li class="nav-item"><a href="sobre.html" >Sobre Nós</a></li>
                     <li class="nav-item"><a href="contato.html" >Contato</a></li>
                     <li class="nav-item"><a href="index.html" >Home</a></li>
-                    <li class="nav-item"> <a class="loginIcon" href="login.html"><span class="material-symbols-outlined">account_circle</span></a></li>
+                                        <li class="nav-item user-menu-wrapper">
+                        <button class="btn-user-icon" id="btnUserIcon" aria-label="Menu do usuário">
+                            <span class="material-symbols-outlined">account_circle</span>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-perfil">
+                                <div class="dropdown-avatar" id="dropAvatar">?</div>
+                                <div class="dropdown-info">
+                                    <span class="dropdown-nome" id="dropNome"></span>
+                                    <span class="dropdown-email" id="dropEmail"></span>
+                                </div>
+                            </div>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" id="btnHistorico">
+                                    <span class="material-symbols-outlined">history</span>
+                                    Histórico
+                                </button>
+                            </div>
+                            <div class="dropdown-sair">
+                                <button class="dropdown-item sair" id="btnSair">
+                                    <span class="material-symbols-outlined">logout</span>
+                                    Sair da conta
+                                </button>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
-    
-    <!-- Calculadora -->
 
-    
-
-        <section class="calculadoraInicio">
-            <div class="container">
-                <div class="containerFlexCalculadora">
-                    <div class="tituloCalculadora">
-                        <h1>Calculadora de Imposto de Renda Anual</h1>
-                        <p>Preencha os dados abaixo para gerar uma <strong>simulação educativa</strong>. As faixas de imposto usadas são apenas um exemplo simplificado.</p>
-                    </div>
-                    <div class="imagemCalculadora">
-                        <img src="../image/calculadora.png" width="450" height="400" alt="Imagem de uma calculadora com um arquivo de taxas">
-                    </div>
-                </div>
+    <!-- ===== MODAL MEUS DADOS ===== -->
+    <div class="modal-overlay" id="modalDados">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>📋 Meus Dados Financeiros</h2>
+                <button class="modal-fechar" id="btnFecharModal" aria-label="Fechar">✕</button>
             </div>
-        </section>
 
-        <section class="calculadora-resultado">
-            <div class="container">
-                <div class="card-calculadora">
-                    <form action="" class="card form-calculadora">
-
-                        <h3>Calculadora</h3>
-
-                        <div class="form-group">
-                            <label for="rendaAno">Renda Anual (R$):</label>
-                            <input type="number" id="rendaAno" min="0" step="0.01" placeholder="R$ 0,00" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="deducao">Deduções (R$):</label>
-                            <input type="number" id="deducao" min="0" step="0.01" placeholder="R$ 0,00">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="dependente">Dependentes:</label>
-                            <input type="number" id="dependente" min="0" step="1" placeholder="Ex: 1">
-                            <p>Cada dependente gera uma dedução estimada.</p>
-                        </div>
-
-                        <button type="submit" class="botao-calculadora">Calcular</button>
-                        
-                        <p id="form-error" class="form-error" aria-live="polite"></p>
-                    </form>
-                </div>
-
-                    <!-- Resultado -->
-
-                <div class="containerFlexResultado">
-                    <div class="card resultado">
-                        <div class="tituloResultado" id="card-resultado">
-                            <h3>Resultado da simulação</h3>
-                        </div>
-
-                        <div class="result-row">
-                            <span>Base de cálculo (R$):</span>
-                            <strong id="resultado-base">–</strong>
-                        </div>
-
-                        <div class="result-row">
-                            <span>Imposto estimado (R$):</span>
-                            <strong id="resultado-imposto">–</strong>
-                        </div>
-
-                        <div class="result-row">
-                            <span>Alíquota efetiva:</span>
-                            <strong id="resultado-aliquota">–</strong>
-                        </div>
-
-                        <div class="result-row">
-                            <span>Renda líquida (R$):</span>
-                            <strong id="resultado-liquida">–</strong>
-                        </div>
-
-                        <hr/>
-
-                        <p class="avisoResultado"><strong>*Observação:</strong> Esta calculadora usa uma <strong>tabela progressiva fictícia</strong> apenas para fins de estudo. Para valores oficiais, consulte um contador ou o site da Receita Federal.</p>
-                    </div>
-                </div>
+            <div class="modal-group">
+                <label for="modal-renda">Renda Anual (R$)</label>
+                <input type="number" id="modal-renda" min="0" step="0.01" placeholder="Ex: 60000.00">
+                <small>Informe sua renda bruta anual total</small>
             </div>
-        </section>
+
+            <div class="modal-group">
+                <label for="modal-deducoes">Deduções (R$)</label>
+                <input type="number" id="modal-deducoes" min="0" step="0.01" placeholder="Ex: 3000.00">
+                <small>Plano de saúde, previdência privada, etc.</small>
+            </div>
+
+            <div class="modal-group">
+                <label for="modal-dependentes">Número de Dependentes</label>
+                <input type="number" id="modal-dependentes" min="0" step="1" placeholder="Ex: 2">
+                <small>Cada dependente deduz R$ 2.275,08 da base de cálculo</small>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancelar-modal" id="btnCancelarModal">Cancelar</button>
+                <button class="btn-salvar-modal" id="btnSalvarModal">💾 Salvar Dados</button>
+            </div>
+
+            <p class="modal-status" id="modal-status"></p>
+        </div>
     </div>
-    
+    <!-- ===== FIM DO MODAL ===== -->
 
-    
+    <!-- Calculadora -->
+    <section class="calculadoraInicio">
+        <div class="container">
+            <div class="containerFlexCalculadora">
+                <div class="tituloCalculadora">
+                    <h1>Calculadora de Imposto de Renda Anual</h1>
+                    <p>Preencha os dados abaixo para gerar uma <strong>simulação educativa</strong>. As faixas de imposto usadas são apenas um exemplo simplificado.</p>
+                </div>
+                <div class="imagemCalculadora">
+                    <img src="../image/calculadora.png" width="450" height="400" alt="Imagem de uma calculadora com um arquivo de taxas">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="calculadora-resultado">
+        <div class="container">
+            <div class="card-calculadora">
+                <form action="" class="card form-calculadora">
+
+                    <h3>Calculadora</h3>
+
+                    <!-- Badge de status dos dados -->
+                    <span class="badge-dados sem-dados" id="badge-status">
+                        ⚠️ Sem dados salvos
+                    </span>
+
+                    <!-- Botão Meus Dados -->
+                    <button type="button" class="btn-meus-dados" id="btnAbrirModal">
+                        <span class="material-symbols-outlined" style="font-size:1.1rem">manage_accounts</span>
+                        Meus Dados
+                    </button>
+
+                    <div class="form-group">
+                        <label for="rendaAno">Renda Anual (R$):</label>
+                        <input type="number" id="rendaAno" min="0" step="0.01" placeholder="R$ 0,00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deducao">Deduções (R$):</label>
+                        <input type="number" id="deducao" min="0" step="0.01" placeholder="R$ 0,00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dependente">Dependentes:</label>
+                        <input type="number" id="dependente" min="0" step="1" placeholder="Ex: 1">
+                        <p>Cada dependente gera uma dedução estimada.</p>
+                    </div>
+
+                    <button type="submit" class="botao-calculadora">Calcular</button>
+                    
+                    <p id="form-error" class="form-error" aria-live="polite"></p>
+                </form>
+            </div>
+
+            <!-- Resultado -->
+            <div class="containerFlexResultado">
+                <div class="card resultado">
+                    <div class="tituloResultado" id="card-resultado">
+                        <h3>Resultado da simulação</h3>
+                    </div>
+
+                    <div class="result-row">
+                        <span>Base de cálculo (R$):</span>
+                        <strong id="resultado-base">–</strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span>Imposto estimado (R$):</span>
+                        <strong id="resultado-imposto">–</strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span>Alíquota efetiva:</span>
+                        <strong id="resultado-aliquota">–</strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span>Renda líquida (R$):</span>
+                        <strong id="resultado-liquida">–</strong>
+                    </div>
+
+                    <hr/>
+
+                    <p class="avisoResultado"><strong>*Observação:</strong> Esta calculadora usa uma <strong>tabela progressiva fictícia</strong> apenas para fins de estudo. Para valores oficiais, consulte um contador ou o site da Receita Federal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="container footer-content">
@@ -144,5 +205,28 @@
 
     <!-- JS Calculadora -->
     <script src="../js/script.js" defer></script>
+
+    <!-- MODAL HISTÓRICO -->
+    <div class="modal-historico-overlay" id="modalHistorico">
+        <div class="modal-historico-box">
+            <div class="modal-historico-header">
+                <h2>📊 Histórico de Cálculos</h2>
+                <button class="historico-fechar" id="btnFecharHistorico">✕</button>
+            </div>
+
+            <div class="historico-dados-salvos">
+                <h4>📋 Dados Financeiros Salvos</h4>
+                <div id="histDadosSalvos">
+                    <p style="color:#888;font-size:0.85rem">Carregando...</p>
+                </div>
+            </div>
+
+            <p class="historico-titulo-calculos">🧮 Cálculos Realizados</p>
+            <div id="histListaCalculos"></div>
+        </div>
+    </div>
+    <!-- FIM MODAL HISTÓRICO -->
+
+    <script src="../js/menu-usuario.js" defer></script>
 </body>
 </html>

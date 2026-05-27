@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Senha - KLion</title>
+    <link rel="shortcut icon" type="image/png" href="../image/logo-aba.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <link rel="stylesheet" href="../CSS/reset.css">
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="../CSS/esqueci-senha.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <a class="logo-icon" href="./index.html">
+                    <img src="../image/logo-aba.png">
+                </a>
+                <div class="logo-text">
+                    <span class="logo-title">KLion</span>
+                    <span class="logo-subtitle">Seu imposto de Renda, Simples e Seguro.</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="caixaPrincipal">
+        <form id="formNovaSenha">
+            <p id="acimaDoInput">Nova senha</p>
+            <input type="password" id="novaSenha" placeholder="Nova senha" required>
+            <p id="acimaDoInput">Confirme a senha</p>
+            <input type="password" id="confirmarSenha" placeholder="Confirme a senha" required>
+            <button type="submit">Redefinir senha</button>
+            <p id="mensagem-status"></p>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <h3>&copy; 2026 - KLion - Cálculo de imposto de renda - Projeto de estudo</h3>
+            <p class="footer-note">Este site é um projeto para fins educacionais.</p>
+        </div>
+    </footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search)
+        const token = params.get("token")
+
+        if (!token) {
+            document.querySelector(".caixaPrincipal").innerHTML =
+                "<p style='color:#dc2626;text-align:center;padding:40px'>Link inválido ou expirado.</p>"
+        }
+
+        document.getElementById("formNovaSenha").addEventListener("submit", async function(e) {
+            e.preventDefault()
+
+            const novaSenha    = document.getElementById("novaSenha").value
+            const confirmar    = document.getElementById("confirmarSenha").value
+            const status       = document.getElementById("mensagem-status")
+
+            if (novaSenha !== confirmar) {
+                status.textContent = "As senhas não coincidem."
+                status.style.color = "#dc2626"
+                return
+            }
+
+            try {
+                const res = await fetch("/nova-senha", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ token, novaSenha })
+                })
+
+                const data = await res.json()
+                status.textContent = data.mensagem
+                status.style.color = data.mensagem.includes("sucesso") ? "#16a34a" : "#dc2626"
+
+                if (data.mensagem.includes("sucesso")) {
+                    setTimeout(() => window.location.href = "./login.html", 2000)
+                }
+
+            } catch (err) {
+                status.textContent = "Erro ao redefinir. Tente novamente."
+                status.style.color = "#dc2626"
+            }
+        })
+    </script>
+</body>
+</html>

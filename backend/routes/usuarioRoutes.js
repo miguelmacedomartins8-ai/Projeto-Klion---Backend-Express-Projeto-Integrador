@@ -3,47 +3,48 @@ const router = express.Router()
 const Usuario = require("../models/Usuario")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const autenticar = require("../middlewares/autenticacao")
 
-const SEGREDO = "klion123" // palavra secreta para gerar o token
+const SEGREDO = "klion123"
 
 // CADASTRO
 router.post("/cadastro", async function(req, res){
     const { nome, email, senha } = req.body
-
-    // criptografa a senha antes de salvar
     const senhaCriptografada = await bcrypt.hash(senha, 10)
-
-    const usuario = await Usuario.create({
-        nome,
-        email,
-        senha: senhaCriptografada
-    })
-
+    await Usuario.create({ nome, email, senha: senhaCriptografada })
     res.json({ mensagem: "Usuário cadastrado com sucesso!" })
 })
 
 // LOGIN
 router.post("/login", async function(req, res){
     const { email, senha } = req.body
-
-    // busca o usuário pelo email
     const usuario = await Usuario.findOne({ where: { email } })
 
     if(!usuario){
         return res.json({ mensagem: "Email não encontrado!" })
     }
 
-    // compara a senha digitada com a senha criptografada
     const senhaCorreta = await bcrypt.compare(senha, usuario.senha)
-
     if(!senhaCorreta){
         return res.json({ mensagem: "Senha incorreta!" })
     }
 
-    // gera o token de sessão
     const token = jwt.sign({ id: usuario.id }, SEGREDO)
-
     res.json({ mensagem: "Login feito com sucesso!", token })
+})
+
+// GET /meu-perfil — retorna nome e email do usuário logado
+router.get("/meu-perfil", autenticar, async function(req, res){
+    const usuario = await Usuario.findOne({
+        where: { id: req.usuarioId },
+        attributes: ["nome", "email"]
+    })
+
+    if(!usuario){
+        return res.json({ mensagem: "Usuário não encontrado!" })
+    }
+
+    res.json({ nome: usuario.nome, email: usuario.email })
 })
 
 module.exports = router
