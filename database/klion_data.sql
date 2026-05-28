@@ -34,3 +34,83 @@ CREATE TABLE tabela_aliquota (
 );
 
 -- ####################################################################
+
+-- 1. View — Informações do Usuário com Dados da Calculadora
+-- Combina dados do usuário com os parâmetros da calculadora. Usada no perfil detalhado.
+CREATE OR REPLACE VIEW vw_info_usuario_calculadora AS
+SELECT
+u.id AS usuario_id,
+u.nome,
+u.email,
+c.id AS calculo_id,
+c.renda_anual,
+c.deducoes,
+c.dependentes,
+c.createdAt AS data_calculo
+FROM Usuarios u
+INNER JOIN info_usuario_calculo c ON c.fk_id = u.id
+ORDER BY c.createdAt DESC;
+
+
+-- 2. View — Resultado da Calculadora (Histórico)
+-- Calcula o imposto estimado pela tabela progressiva IRPF 2024. Usada no histórico de simulações.
+CREATE OR REPLACE VIEW vw_resultado_calculadora AS
+SELECT
+c.id AS calculo_id,
+u.id AS usuario_id,
+u.nome,
+c.renda_anual,
+c.deducoes,
+c.dependentes,
+GREATEST(
+c.renda_anual - c.deducoes - (c.dependentes * 189.59 * 12),
+0
+) AS base_calculo,
+CASE
+WHEN GREATEST(c.renda_anual - c.deducoes - (c.dependentes * 189.59 * 12), 0)
+<= 24511.92 THEN 0
+WHEN GREATEST(c.renda_anual - c.deducoes - (c.dependentes * 189.59 * 12), 0)
+<= 33919.80 THEN
+GREATEST(c.renda_anual - c.deducoes - (c.dependentes * 189.59 * 12), 0) * 0
+.075 - 1838.39
+WHEN GREATEST(c.renda_anual - c.deducoes - (c.dependentes * 189.59 * 12), 0)
+<= 45012.60 THEN
+GREATEST(c.renda_anual - c.deducoes - (c.dependentes * 189.59 * 12), 0) * 0
+.15 - 4382.38
+WHEN GREATEST(c.renda_anual - c.deducoes - (c.dependentes * 189.59 * 12), 0)
+<= 55976.16 THEN
+GREATEST(c.renda_anual - c.deducoes - (c.dependentes * 189.59 * 12), 0) * 0
+.225 - 7758.32
+ELSE
+GREATEST(c.renda_anual - c.deducoes - (c.dependentes * 189.59 * 12), 0) * 0
+.275 - 10557.13
+END AS imposto_estimado,
+c.createdAt AS data_calculo
+FROM info_usuario_calculo c
+INNER JOIN Usuarios u ON u.id = c.fk_id
+ORDER BY c.createdAt DESC;
+
+
+
+-- 3. View — Tabela Progressiva do IRPF (referência + cálculo)
+-- Faixas da tabela IRPF 2024. Usada para exibir a tabela na UI e pelo backend durante o cálculo.
+CREATE OR REPLACE VIEW vw_tabela_irpf AS
+SELECT 1 AS faixa, 'Isento' AS descricao,
+0.00 AS limite_inferior, 24511.92 AS limite_superior,
+0.000 AS aliquota, 0.00 AS deducao_fixa
+UNION ALL
+SELECT 2, '7,5%', 24511.93, 33919.80, 0.075, 1838.39
+UNION ALL
+SELECT 3, '15%', 33919.81, 45012.60, 0.150, 4382.38
+UNION ALL
+SELECT 4, '22,5%', 45012.61, 55976.16, 0.225, 7758.32
+UNION ALL
+SELECT 5, '27,5%', 55976.17, NULL, 0.275, 10557.13;
+-- 4. Select — Nome e E-mail (Perfil)
+-- Query direta na tabela Usuarios. Sem view por ser simples.
+SELECT
+id,
+nome,
+email
+FROM Usuarios
+WHERE id = :usuario_id;
