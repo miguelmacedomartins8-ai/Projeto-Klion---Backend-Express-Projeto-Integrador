@@ -1,3 +1,7 @@
+CREATE DATABASE klion_data;
+
+USE klion_data;
+
 CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nome_usuario VARCHAR(160) NOT NULL,
@@ -32,6 +36,13 @@ CREATE TABLE tabela_aliquota (
     limite_reais VARCHAR(20) NOT NULL,
     aliquota VARCHAR(6) NOT NULL
 );
+
+INSERT INTO tabela_aliquota (faixa, limite_reais, aliquota) VALUES
+(1, '24511.92', '0'),
+(2, '33919.80', '7.5'),
+(3, '45012.60', '15'),
+(4, '55976.16', '22.5'),
+(5, '999999999', '27.5');
 
 -- ####################################################################
 
