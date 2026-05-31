@@ -163,9 +163,10 @@ span {
 }
 
 .user-menu-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-user-icon {
@@ -205,15 +206,19 @@ span {
 .user-dropdown {
     display: none;
     position: absolute;
+
     top: calc(100% + 14px);
-    right: 0;
+    left: 50%;
+    right: auto;
+
+    transform: translateX(-50%);
+
     width: 260px;
     background: #fff;
     border-radius: 14px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.18);
     z-index: 1000;
     overflow: hidden;
-    animation: dropFade 0.2s ease;
 }
 
 .user-dropdown.aberto {
@@ -221,8 +226,15 @@ span {
 }
 
 @keyframes dropFade {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 /* Cabeçalho do dropdown — nome e email */
