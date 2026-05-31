@@ -49,7 +49,7 @@
 .containerFlexResultado {
   margin: auto;
   display: flex;
-  margin-top: 2vw;
+  margin-top: 1.5vw;
   width: 700px;
   padding: 20px;
   border-radius: 30px;
@@ -59,9 +59,10 @@
 }
 
 .form-calculadora h3 {
+  justify-self: center;
   margin-top: 0;
   font-family: "Montserrat", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   color: #1e3a5f;
 }
 
@@ -123,6 +124,8 @@
   padding: 12px 20px;
   font-weight: bold;
   transition: 1s ease;
+  display: block;
+  margin: 0 auto;
 }
 
 .botao-calculadora:hover {
@@ -279,8 +282,10 @@
 .modal-status.erro    { color: #dc2626; }
 
 .badge-dados {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    width: fit-content;
+    margin: 0 auto 14px;
     gap: 6px;
     font-size: 0.82rem;
     font-weight: 600;
