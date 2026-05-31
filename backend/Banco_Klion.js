@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('klion_data', 'root', '06132024Mi!', {
+const sequelize = new Sequelize('klion_data', 'root', 'master', {
     host: "localhost",
     dialect: 'mysql'
 })
