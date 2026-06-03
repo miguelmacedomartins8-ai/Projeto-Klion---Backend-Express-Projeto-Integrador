@@ -103,14 +103,14 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 * **CSS3** — Estilização, layout e design responsivo.
 
 ### Integrantes:
-* Rafael Silva Machado
-* Gabriel Povidaiko Suto de Morais
-* Miguel Macedo Martins
-* André Joaquim Santana da Silva
+* Rafael Silva Machado - Documentação
+* Gabriel Povidaiko Suto de Morais - FrontEnd
+* Miguel Macedo Martins - BackEnd
+* André Joaquim Santana da Silva - Banco de Dados
 
 <p align="center">
   <sub>
     &copy; 2026 - KLion, Seu imposto de Renda, Simples e Seguro.
     <a href="#"><img src="./frontend/image/logo-aba.png" width="22" align="center" alt="Logomarca do Projeto Klion"></a>
   </sub>
-</p>
+git push</p>
