@@ -82,7 +82,7 @@ npm start
 #### **6ª Etapa:** Acesse no navegador o link da página inicial do site
 
 ```
-[Página Inicial do KLion](http://localhost:2026/views/login.html)
+http://localhost:2026/views/login.html
 ```
 
 ## Tecnologias Utilizadas:
