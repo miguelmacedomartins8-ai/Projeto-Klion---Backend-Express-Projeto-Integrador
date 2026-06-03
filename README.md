@@ -22,23 +22,23 @@ aplicação prática, e transformando um tema técnico e complexo em uma experi�
 acessível.
 
 # Como testar o Site:
-**1° Etapa:** Clone o repositório, e acesse a pasta "backend"
+#### **1ª Etapa:** Clone o repositório, e acesse a pasta "backend"
 
-```
+```bash
 git clone https://github.com/miguelmacedomartins8-ai/Projeto-Klion---Backend-Express-Projeto-Integrador
 cd backend
 ```
 
-**2° Etapa:** Instale as dependências do Projeto
+#### **2ª Etapa:** Instale as dependências do Projeto
 
-```
+```bash
 npm install
 ```
 
-**3° Etapa:** Conecte-se ao banco de dados  
+### **3ª Etapa:** Conecte-se ao banco de dados  
 Na pasta `backend` abra o arquivo `Banco_Klion.js`.
 
-<small>backend > Banco_Klion.js</small>
+<sub>backend > Banco_Klion.js</sub>
 
 E altere os campos `sua_senha` para a senha do seu root local.
 ```javascript
@@ -50,12 +50,12 @@ const sequelize = new Sequelize('klion_data', 'root', 'sua_senha', {
 ```
 Após isso rode os comandos "CREATE" e o comando do banco de dados `klion_data.sql` na `database`.
 
-<small>database > klion_data.sql</small>
+<sub>database > klion_data.sql</sub>
 
 > [!WARNING]
 > Caso queira rodar no seu próprio `CREATE DATABASE` altere o nome `klion_data` na linha do código de conexão com o banco. **APENAS SE FOR RODAR NO PRÓPRIO DATABASE**
 
-**4° Etapa:** Abra o `MySQL Workbench` e execute o comando `USE klion_data;`
+#### **4ª Etapa:** Abra o `MySQL Workbench` e execute o comando `USE klion_data;`
 
 Para a calculadora funcionar será necessário popular a tabela `tabela_aliquota` com o `INSERT` a baixo:
 
@@ -68,18 +68,18 @@ INSERT INTO tabela_aliquota (faixa, limite_reais, aliquota) VALUES
 (5, '999999999', '27.5');
 ```
 
-**5° Etapa:** Inicie o servidor local
+#### **5ª Etapa:** Inicie o servidor local
 
-```
+```bash
 nodemon app.js
 ```
 Ou
 
-```
+```bash
 npm start
 ```
 
-**6° Etapa:** Acesse no navegador o link da página inicial do site
+#### **6ª Etapa:** Acesse no navegador o link da página inicial do site
 
 ```
 [Página Inicial do KLion](http://localhost:2026/views/login.html)
@@ -109,9 +109,8 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 * André Joaquim Santana da Silva
 
 <p align="center">
-  <small>
-    &copy; 2026 - KLion, O Seu imposto de Renda, Simples e Seguro. 
-    <img src="./frontend/image/logo-aba.png" width="25" style="vertical-align: middle;" alt="Logomarca do Projeto Klion">
-  </small>
+  <sub>
+    &copy; 2026 - KLion, Seu imposto de Renda, Simples e Seguro.
+    <a href="#"><img src="./frontend/image/logo-aba.png" width="22" align="center" alt="Logomarca do Projeto Klion"></a>
+  </sub>
 </p>
-
