@@ -113,4 +113,4 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
     &copy; 2026 - KLion, Seu imposto de Renda, Simples e Seguro.
     <a href="#"><img src="./frontend/image/logo-aba.png" width="22" align="center" alt="Logomarca do Projeto Klion"></a>
   </sub>
-git push</p>
+</p>
