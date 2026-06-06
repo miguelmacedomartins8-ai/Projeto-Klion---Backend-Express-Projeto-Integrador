@@ -9,6 +9,20 @@ CREATE TABLE usuario (
     senha_usuario VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE tabela_aliquota (
+    id_tabela_aliquota INT AUTO_INCREMENT PRIMARY KEY,
+    faixa INT NOT NULL,
+    limite_reais VARCHAR(20) NOT NULL,
+    aliquota VARCHAR(6) NOT NULL
+);
+
+INSERT INTO tabela_aliquota (faixa, limite_reais, aliquota) VALUES
+(1, '24511.92', '0'),
+(2, '33919.80', '7.5'),
+(3, '45012.60', '15'),
+(4, '55976.16', '22.5'),
+(5, '999999999', '27.5');
+
 CREATE TABLE info_usuario_calculo (
     id_infoCalculo INT AUTO_INCREMENT PRIMARY KEY,
     renda_anual DECIMAL(9, 2),
@@ -29,20 +43,6 @@ CREATE TABLE resultado_calculo (
     fk_id_usuario INT,
     FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id_usuario)
 );
-
-CREATE TABLE tabela_aliquota (
-    id_tabela_aliquota INT AUTO_INCREMENT PRIMARY KEY,
-    faixa INT NOT NULL,
-    limite_reais VARCHAR(20) NOT NULL,
-    aliquota VARCHAR(6) NOT NULL
-);
-
-INSERT INTO tabela_aliquota (faixa, limite_reais, aliquota) VALUES
-(1, '24511.92', '0'),
-(2, '33919.80', '7.5'),
-(3, '45012.60', '15'),
-(4, '55976.16', '22.5'),
-(5, '999999999', '27.5');
 
 -- ####################################################################
 

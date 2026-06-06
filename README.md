@@ -48,14 +48,20 @@ const sequelize = new Sequelize('klion_data', 'root', 'sua_senha', {
     dialect: 'mysql'
 })
 ```
-Após isso rode os comandos "CREATE" e o comando do banco de dados `klion_data.sql` na `database`.
+Após isso rode os comandos "CREATE DATABASE klion_data" do banco de dados `klion_data.sql` na pasta `database`.
 
 <sub>database > klion_data.sql</sub>
 
 > [!WARNING]
 > Caso queira rodar no seu próprio `CREATE DATABASE` altere o nome `klion_data` na linha do código de conexão com o banco. **APENAS SE FOR RODAR NO PRÓPRIO DATABASE**
 
-#### **4ª Etapa:** Abra o `MySQL Workbench` e execute o comando `USE klion_data;`
+#### **4ª Etapa:** Inicie o servidor local
+
+```bash
+nodemon app.js
+```
+
+#### **5ª Etapa:** Abra o `MySQL Workbench` e execute o comando `USE klion_data;`
 
 Para a calculadora funcionar será necessário popular a tabela `tabela_aliquota` com o `INSERT` a baixo:
 
@@ -68,22 +74,16 @@ INSERT INTO tabela_aliquota (faixa, limite_reais, aliquota) VALUES
 (5, '999999999', '27.5');
 ```
 
-#### **5ª Etapa:** Inicie o servidor local
-
-```bash
-nodemon app.js
-```
-Ou
-
-```bash
-npm start
-```
-
 #### **6ª Etapa:** Acesse no navegador o link da página inicial do site
 
 ```
 http://localhost:2026/views/index.html
 ```
+
+### Em caso de duvidas:
+Se não for possível inicializar o servidor, assista esse video 
+para fazer as configurações corretamente.
+
 
 ## Tecnologias Utilizadas:
 O projeto foi desenvolvido utilizando as seguintes tecnologias:
