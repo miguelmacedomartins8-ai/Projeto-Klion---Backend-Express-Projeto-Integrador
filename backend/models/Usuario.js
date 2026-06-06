@@ -19,6 +19,8 @@ const Usuario = sequelize.define("Usuario", {
     tokenRecuperacao: {
         type: Sequelize.STRING
     }
+}, {
+    tableName: "usuarios"  
 })
 
 module.exports = Usuario
