@@ -81,8 +81,8 @@ http://localhost:2026/views/index.html
 ```
 
 ### Em caso de duvidas:
-Se não for possível inicializar o servidor, assista esse video 
-para fazer as configurações corretamente.
+
+<a href="#"><img src="./database/Ordem_Banco_Klion.png" width="500" align="center" alt="Logomarca do Projeto Klion"></a>
 
 
 ## Tecnologias Utilizadas:
