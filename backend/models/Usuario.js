@@ -2,11 +2,6 @@ const sequelize = require("../Banco_Klion")
 const Sequelize = require("sequelize")
 
 const Usuario = sequelize.define("Usuario", {
-    id_usuario: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
     nome: {
         type: Sequelize.STRING
     },
@@ -14,13 +9,14 @@ const Usuario = sequelize.define("Usuario", {
         type: Sequelize.STRING
     },
     senha: {
-        type: Sequelize.STRING // vai guardar a senha criptografada
+        type: Sequelize.STRING  // vai guardar a senha criptografada
     },
-    tokenRecuperacao: {
+    tokenRecuperacao: { 
         type: Sequelize.STRING
     }
 }, {
     tableName: "usuarios"  
 })
+
 
 module.exports = Usuario

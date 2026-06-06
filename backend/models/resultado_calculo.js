@@ -3,11 +3,6 @@ const Sequelize = require("sequelize")
 const Usuario = require("./Usuario")
 
 const ResultadoCalculo = sequelize.define("resultado_calculo", {
-    id_resultado_calculo: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
     base_calculo: {
         type: Sequelize.DECIMAL(9, 2)
     },
@@ -24,7 +19,7 @@ const ResultadoCalculo = sequelize.define("resultado_calculo", {
         type: Sequelize.INTEGER,
         references: {
             model: Usuario,
-            key: "id_usuario"
+            key: "id"
         }
     }
 }, {

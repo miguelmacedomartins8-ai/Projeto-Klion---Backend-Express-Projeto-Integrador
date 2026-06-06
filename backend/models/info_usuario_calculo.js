@@ -3,11 +3,6 @@ const Sequelize = require("sequelize")
 const Usuario = require("./Usuario")
 
 const InfoUsuarioCalculo = sequelize.define("infi_usuario_calculo", {
-    id_info_usuario_calculo: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
     renda_anual: {
         type: Sequelize.DECIMAL(9, 2)
     },
@@ -21,7 +16,7 @@ const InfoUsuarioCalculo = sequelize.define("infi_usuario_calculo", {
         type: Sequelize.INTEGER,
         references: {
             model: Usuario,
-            key: "id_usuario"
+            key: "id"
         }
     }
 }, {
