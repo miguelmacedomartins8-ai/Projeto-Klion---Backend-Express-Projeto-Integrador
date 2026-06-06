@@ -21,4 +21,4 @@ const TabelaAliquota = sequelize.define("tabela_aliquota", {
     timestamps: false
 })
 
-module.exports = TabelaAliquota
+module.exports = TabelaAliquot
