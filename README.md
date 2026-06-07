@@ -84,6 +84,12 @@ http://localhost:2026/views/index.html
 
 <a href="#"><img src="./database/Ordem_Banco_Klion.png" width="500" align="center" alt="Logomarca do Projeto Klion"></a>
 
+# Links:
+
+Video Pitch: https://youtu.be/xZ_rWjJkKL4
+
+Video manual tecnico de utilização do site (em caso de dúvidas de como inicializar o site):
+https://www.youtube.com/watch?v=h-F6pBYbJV4
 
 ## Tecnologias Utilizadas:
 O projeto foi desenvolvido utilizando as seguintes tecnologias:
